@@ -109,6 +109,7 @@ while i < 270900:
   if jsonScrape:
     courses+=jsonScrape
   i+=1
+  print(jsonScrape)
 
 
 file = open('courseData.json', 'w')
