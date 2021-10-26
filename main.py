@@ -4,7 +4,6 @@ import json
 
 i = 270867
 
-
 def scrape(i):
 
   URL = "https://catalog.udel.edu/preview_course.php?coid=" + str(i)
@@ -82,7 +81,7 @@ def scrape(i):
 
   course = {
     courseID : {
-      "title" : courseTitle,
+      'title' : courseTitle,
       "credits" : credits,
       "component" : component,
       "repeatable" : repeatable,
@@ -96,22 +95,20 @@ def scrape(i):
     }
   }
 
-  x = json.dumps(course)
-  print(x)
-  return x
-
-
-courses = json.dumps("")
-
+  return course
+courses=[]
 #while i < 275300:
-while i < 270900:
+while i < 270872:
   jsonScrape = scrape(i)
-  if jsonScrape:
-    courses+=jsonScrape
-  i+=1
-  print(jsonScrape)
 
+  if jsonScrape :
+    courses += jsonScrape.items()
+
+  i+=1
+  
+x = json.dumps(courses)
+print(x)
 
 file = open('courseData.json', 'w')
-file.write(courses)
+file.write(x)
 file.close()
