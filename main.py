@@ -37,7 +37,6 @@ def scrape(i):
   startSearchTmp = strResults.find('<br>', endSearch+3, endSearch+25)
   endSearchTmp = strResults.find('."<',startSearch)
 
-
   if startSearchTmp != -1:
     description = strResults[startSearch+4:endSearch]
     startSearch = startSearchTmp
@@ -63,8 +62,8 @@ def scrape(i):
   #Multiple Term Enrollment:
   startSearch = strResults.find('Multiple Term Enrollment:',startSearch)
   endSearch = strResults.find('<s',startSearch)
-
   multTermEnrollment = strResults[startSearch+len(au)+21:endSearch]
+
 
   #PREREQ:
   prereqs = []
@@ -79,7 +78,7 @@ def scrape(i):
       startSearch+=1
 
 
-  course = {
+  course = {     #build course JSON
     courseID : {
       'title' : courseTitle,
       "credits" : credits,
@@ -97,8 +96,8 @@ def scrape(i):
 
   return course
 courses=[]
-#while i < 275300:
-while i < 270872:
+while i < 275300:
+#while i < 270872: test
   jsonScrape = scrape(i)
 
   if jsonScrape :
