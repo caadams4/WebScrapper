@@ -3,6 +3,25 @@ from bs4 import BeautifulSoup
 import json
 
 i = 270867
+global courseID
+
+
+def getID(i):
+    URL = "https://catalog.udel.edu/preview_course.php?coid=" + str(i)
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, "html.parser")
+    results = soup.find("td", class_="block_content_popup")
+
+    #Title
+    try:
+        title = results.find(id="course_preview_title")
+        courseTitle = title.text
+    except Exception:
+        return
+
+    #CourseID -- parsed from title
+    courseID = title.text[:8]
+    return courseID
 
 
 def scrape(i):
@@ -112,21 +131,22 @@ def scrape(i):
         engineeringBreadth += strResults[startSearch + 39:foundEB-1]
 
 
-    course = {  #build course JSON
-        courseID: {
-            'title': courseTitle,
-            "credits": credits,
-            "description": description,
-            "component": component,
-            "repeatable": repeatable,
-            "allowedUnits": allowedUnits,
-            "multTermEnrollment": multTermEnrollment,
-            "prereqs": prereqs,
-            "crosslisted": crosslist,
-            "University Breadth": univBreadth,
-            "Engineering Breadth": "",
-            "URL": URL
-        }
+    course = {  
+       courseID : {
+          "courseID": courseID,
+          "title" : courseTitle,
+          "credits": credits,
+          "description": description,
+          "component": component,
+          "repeatable": repeatable,
+          "allowedUnits": allowedUnits,
+          "multTermEnrollment": multTermEnrollment,
+          "prereqs": prereqs,
+          "crosslisted": crosslist,
+          "University Breadth": univBreadth,
+          "Engineering Breadth": "",
+          "URL": URL
+      }  
     }
     return course
 
@@ -135,9 +155,10 @@ courses=[]
 while i < 275300:
 #while i < 270899: 
   jsonScrape = scrape(i)
+  courseID = getID(i)
   if jsonScrape :
-    courses += jsonScrape.items()
-
+    courses += jsonScrape.values()
+  print(i)
   i+=1
 
 
