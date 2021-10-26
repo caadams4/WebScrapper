@@ -1,0 +1,11 @@
+--2021-10-25 18:15:33--  https://catalog.udel.edu/ajax/preview_course.php?catoid=47
+Resolving catalog.udel.edu (catalog.udel.edu)... 18.215.95.201, 3.208.11.34
+Connecting to catalog.udel.edu (catalog.udel.edu)|18.215.95.201|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 0 [text/html]
+Saving to: ‘preview_course.php?catoid=47’
+
+preview_course.php?catoid=47           [<=>                                                           ]       0  --.-KB/s               preview_course.php?catoid=47           [ <=>                                                          ]       0  --.-KB/s    in 0s      
+
+2021-10-25 18:15:34 (0.00 B/s) - ‘preview_course.php?catoid=47’ saved [0/0]
+
